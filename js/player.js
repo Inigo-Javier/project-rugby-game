@@ -9,7 +9,7 @@ class  player{
 
 
 drawPlayer(){
-    this.ctx.strokeStyle = 'black'
+    this.ctx.fillStyle = 'black'
     this.ctx.fillRect(this.playerPos.x,this.playerPos.y,this.playerSize.w,this.playerSize.h)
 }
     moveLeft(){

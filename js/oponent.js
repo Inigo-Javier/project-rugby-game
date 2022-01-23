@@ -6,9 +6,14 @@ class oponent{
         }
 
 draw(){
-    this.ctx.strokeStyle = 'green'
-     this.ctx.fillRect(this.playerPos.x, this.playerPos.y, this.playerSize.w, this.playerSize.h)   
+    this.ctx.fillStyle = 'green'
+    this.ctx.fillRect(this.oponentPos.x, this.oponentPos.y, this.oponentSize.w, this.oponentSize.h) 
+    this.fall()   
 }
+    fall() {
+        this.oponentPos.y += 4
+    }
+
 
 
 
