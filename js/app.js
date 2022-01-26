@@ -2,6 +2,7 @@ const rugbyApp = {
     appName: 'rugby',
     author: 'Jorge Garzon and Iñigo Malluguiza',
     gameSize: { w: undefined, h: undefined },
+    Background: undefined,
     ctx: undefined,
     player: undefined,
     playerLeft: undefined,
@@ -19,6 +20,7 @@ const rugbyApp = {
         // console.log('hola')
         this.setContext()
         this.setSize()
+        this.Background = new Background(this.ctx, this.gameSize.w, this.gameSize.h, "./images/field.jpg")
         this.newPlayer()
         this.createOponents()
         this.setEventHandlers()
@@ -106,11 +108,11 @@ const rugbyApp = {
             if (!this.horizontalCheckLeft()) {
                 this.leftPush && (this.player.moveLeft())
             }
-            
 
-                this.wPush && (this.wardOfPlayers())
 
-            
+            this.wPush && (this.wardOfPlayers())
+
+
             this.ePush && (this.closerPlayers())
             this.upPush && (this.moveAllUp())
             this.downPush && (this.moveAllDown())
@@ -185,7 +187,7 @@ const rugbyApp = {
 
         })
     },
-   
+
     wardOfPlayers() {
         this.players.forEach(pla => {
             if (this.player.playerPos.x < pla.playerPos.x) {
@@ -209,9 +211,10 @@ const rugbyApp = {
 
             this.framesIndex % 100 === 0 ? this.createOponents() : null
             this.clearAll()
-            this.playerCentre.drawPlayer()
-            this.playerLeft.drawPlayer()
-            this.playerRight.drawPlayer()
+            this.Background.draw()
+            this.playerCentre.drawPlayer(this.framesIndex)
+            this.playerLeft.drawPlayer(this.framesIndex)
+            this.playerRight.drawPlayer(this.framesIndex)
             this.move();
             this.oponents.forEach(elm => {
                 elm.draw()
@@ -223,6 +226,8 @@ const rugbyApp = {
         }, 20)
     },
     clearAll() {
+
+        console.log(this.Background)
         this.ctx.clearRect(0, 0, this.gameSize.w, this.gameSize.h)
         this.clearOponents()
     },
