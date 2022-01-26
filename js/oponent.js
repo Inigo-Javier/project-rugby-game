@@ -11,7 +11,7 @@ draw(){
     this.fall()   
 }
     fall() {
-        this.oponentPos.y += 4
+        this.oponentPos.y += 2
     }
 
 

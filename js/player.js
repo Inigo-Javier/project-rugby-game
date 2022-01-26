@@ -15,14 +15,14 @@ drawPlayer(){
     moveLeft(){
     if (this.playerPos.x > 30) {
         this.playerPos.x -= 8
-        console.log(this.playerPos.x)
+        // console.log(this.playerPos.x)
         
     }
      }
     moveRight() {
         if (this.playerPos.x < 420) {
             this.playerPos.x += 8
-            console.log(this.playerPos.x)
+            // console.log(this.playerPos.x)
         }
     }
     moveUp() {
