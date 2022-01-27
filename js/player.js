@@ -3,36 +3,40 @@ class  player{
         this.ctx = ctx
         this.playerPos = {x: posX, y: posY}
         this.playerSize = {w: width,h: height}
-        this.imageInstance = undefined
+
+
+        
+        
 
 
 
-        this.image = new Image();
-        this.image.src = "./images/allBlacks.png";
-        this.image.frames = 2;
-        this.image.framesIndex = 1;
+
+        // this.image = new Image();
+        // this.image.src = "./images/allBlacks.png";
+        // this.image.frames = 2;
+        // this.image.framesIndex = 1;
 
     }
-    drawPlayer(framesCounter) {
+    drawPlayer(framesCounter,image) {
 
-        this.ctx.drawImage(this.image,
-         this.image.framesIndex * (this.image.width / this.image.frames),
+        this.ctx.drawImage(image,
+         image.framesIndex * (image.width /image.frames),
         0,        
-        this.image.width / this.image.frames,
-        this.image.height,
+        image.width /image.frames,
+        image.height,
         this.playerPos.x,
         this.playerPos.y,
         this.playerSize.w+6,
         this.playerSize.h+6)
-        this.animate(framesCounter)
+        this.animate(framesCounter,image)
 
     }
-    animate(framesCounter) {
+    animate(framesCounter,image) {
         if (framesCounter % 5 == 0) {
-            this.image.framesIndex++;
+            image.framesIndex++;
         }
-        if (this.image.framesIndex >= this.image.frames) {
-            this.image.framesIndex = 0;
+        if (image.framesIndex >= image.frames) {
+            image.framesIndex = 0;
         }
     }
        

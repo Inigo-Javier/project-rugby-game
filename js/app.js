@@ -15,17 +15,23 @@ const rugbyApp = {
     framesIndex: 0,
     score: 0,
     level: 4,
+    gameOverImg:undefined,
     audio:undefined,
+    image1: undefined,
+    image2: undefined,
+    image3: undefined,
 
+    
 
 
     init() {
         // console.log('hola')
         this.setContext()
         this.setSize()
+        this.setImages()
         this.Background = new Background(this.ctx, this.gameSize.w, this.gameSize.h, "./images/field.jpg")
         this.audio = new Audio("./audio/supporters.wav")
-        
+        this.initImageOver()
         this.newPlayer()
         this.newBall()
         this.createOponents()
@@ -228,14 +234,26 @@ const rugbyApp = {
         this.ctx.fillText(`${score} metres`,this.gameSize.w-100,50,90)
     },
 
-    gameOver() {
+    // gameOver() {
         
+    //     clearInterval(intervalID)
+    //     this.ctx.fillRect( this.gameSize.w - 100, 50, 90,100)
+    //     this.oponents = []
+    //     this.players = []
+    //     this.framesIndex = 0
+
+    // },
+    initImageOver(){
+        this.gameOverImg = new Image()
+        this.gameOverImg.src = '../images/gameOver.jpg'
+    },
+    gameOver() {
         clearInterval(intervalID)
-        this.ctx.fillRect( this.gameSize.w - 100, 50, 90,100)
+       
+        this.ctx.drawImage(this.gameOverImg, 0, this.gameSize.h / 4, this.gameSize.w, 300)
         this.oponents = []
         this.players = []
         this.framesIndex = 0
-
     },
     drawAll() {
         intervalID = setInterval(() => {
@@ -244,9 +262,9 @@ const rugbyApp = {
             this.framesIndex % 100 === 0 ? this.createOponents() : null
             this.clearAll()
             this.Background.draw()
-            this.playerCentre.drawPlayer(this.framesIndex)
-            this.playerLeft.drawPlayer(this.framesIndex)
-            this.playerRight.drawPlayer(this.framesIndex)
+            this.playerCentre.drawPlayer(this.framesIndex,this.image1)
+            this.playerLeft.drawPlayer(this.framesIndex,this.image2)
+            this.playerRight.drawPlayer(this.framesIndex,this.image3)
             this.pass()
             this.ball.draw()
             this.drawScore()
@@ -269,5 +287,22 @@ const rugbyApp = {
     },
     clearOponents() {
         this.oponents = this.oponents.filter(elm => elm.oponentPos.y <= this.gameSize.h - elm.oponentSize.h)
+    },
+    setImages(){
+        this.image1 = new Image();
+        this.image1.src = "./images/allBlacks.png";
+        this.image1.frames = 2;
+        this.image1.framesIndex = 1;
+
+        this.image2 = new Image();
+        this.image2.src = "./images/allBlacks11.png";
+        this.image2.frames = 2;
+        this.image2.framesIndex = 1;
+
+        this.image3 = new Image();
+        this.image3.src = "./images/allBlacks15.png";
+        this.image3.frames = 2;
+        this.image3.framesIndex = 1;
+
     }
 }
