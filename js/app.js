@@ -11,9 +11,12 @@ const rugbyApp = {
     players: [],
     oponent: undefined,
     oponents: [],
+    ball:undefined,
     framesIndex: 0,
     score: 0,
     level: 4,
+    audio:undefined,
+
 
 
     init() {
@@ -21,10 +24,14 @@ const rugbyApp = {
         this.setContext()
         this.setSize()
         this.Background = new Background(this.ctx, this.gameSize.w, this.gameSize.h, "./images/field.jpg")
+        this.audio = new Audio("./audio/supporters.wav")
+        
         this.newPlayer()
+        this.newBall()
         this.createOponents()
         this.setEventHandlers()
         this.drawAll()
+
     },
 
     setContext() {
@@ -63,6 +70,9 @@ const rugbyApp = {
             rowOponents.push(opo)
         }
         this.oponents.push(...rowOponents)
+    },
+    newBall(){
+        this.ball = new ball(this.ctx, this.gameSize.w / 2, this.gameSize.h - 90, 10, 10)
     },
     // createOponents() {
     //     // console.log('me llamaron wei')
@@ -187,6 +197,16 @@ const rugbyApp = {
 
         })
     },
+    pass(){
+        if ((this.player.playerPos.x > (this.ball.ballPos.x))) {
+            this.ball.moveRight()
+        } 
+         if ((this.player.playerPos.x  < this.ball.ballPos.x )) {
+            this.ball.moveLeft()
+        } 
+        // if (this.player.playerPos.x < this.ball.ballPos.x)
+        this.ball.ballPos.y = this.player.playerPos.y+10
+    },
 
     wardOfPlayers() {
         this.players.forEach(pla => {
@@ -208,16 +228,19 @@ const rugbyApp = {
     drawAll() {
         intervalID = setInterval(() => {
             this.framesIndex++
-
+            this.audio.play()
             this.framesIndex % 100 === 0 ? this.createOponents() : null
             this.clearAll()
             this.Background.draw()
             this.playerCentre.drawPlayer(this.framesIndex)
             this.playerLeft.drawPlayer(this.framesIndex)
             this.playerRight.drawPlayer(this.framesIndex)
+            this.pass()
+            this.ball.draw()
             this.move();
+            this.pass()
             this.oponents.forEach(elm => {
-                elm.draw(this.framesIndex)
+                elm.draw(this.framesIndex,this.player)
             })
             this.checkColision()
             this.horizontalCheckLeft()

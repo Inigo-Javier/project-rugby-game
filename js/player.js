@@ -22,8 +22,8 @@ class  player{
         this.image.height,
         this.playerPos.x,
         this.playerPos.y,
-        this.playerSize.w,
-        this.playerSize.h)
+        this.playerSize.w+6,
+        this.playerSize.h+6)
         this.animate(framesCounter)
 
     }
@@ -58,14 +58,15 @@ class  player{
         }
     }
     moveUp() {
-
+        if (this.playerPos.y > 0) {
         this.playerPos.y -= 6
-
+        }
     }
     moveDown() {
+        if (this.playerPos.y < 400) {
 
         this.playerPos.y += 6
-
+        }
     }
 
 }
