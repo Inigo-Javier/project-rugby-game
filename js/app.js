@@ -152,7 +152,11 @@ const rugbyApp = {
                 this.player.playerPos.y < opo.oponentPos.y + opo.oponentSize.h &&
                 this.player.playerSize.h + this.player.playerPos.y > opo.oponentPos.y) {
 
+                
                 this.gameOver()
+                
+                
+
             }
         })
 
@@ -217,9 +221,17 @@ const rugbyApp = {
             }
         })
     },
+    drawScore(){
+        let score =Math.floor(this.framesIndex /10)
+        this.ctx.fillStyle = 'black'
+        this.ctx.font = '50px Arial'
+        this.ctx.fillText(`${score} metres`,this.gameSize.w-100,50,90)
+    },
 
     gameOver() {
+        
         clearInterval(intervalID)
+        this.ctx.fillRect( this.gameSize.w - 100, 50, 90,100)
         this.oponents = []
         this.players = []
         this.framesIndex = 0
@@ -237,6 +249,7 @@ const rugbyApp = {
             this.playerRight.drawPlayer(this.framesIndex)
             this.pass()
             this.ball.draw()
+            this.drawScore()
             this.move();
             this.pass()
             this.oponents.forEach(elm => {

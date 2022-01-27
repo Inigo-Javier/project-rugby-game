@@ -58,7 +58,7 @@ class  player{
         }
     }
     moveUp() {
-        if (this.playerPos.y > 0) {
+        if (this.playerPos.y > 200) {
         this.playerPos.y -= 6
         }
     }

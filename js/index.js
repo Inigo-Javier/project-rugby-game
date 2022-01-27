@@ -4,6 +4,7 @@ window.onload = () => {
     };
 
 function startGame(){
+  document.activeElement.blur()
   rugbyApp.init()
    }
 };
