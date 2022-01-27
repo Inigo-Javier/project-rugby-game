@@ -217,7 +217,7 @@ const rugbyApp = {
             this.playerRight.drawPlayer(this.framesIndex)
             this.move();
             this.oponents.forEach(elm => {
-                elm.draw()
+                elm.draw(this.framesIndex)
             })
             this.checkColision()
             this.horizontalCheckLeft()
