@@ -20,6 +20,7 @@ const rugbyApp = {
     image1: undefined,
     image2: undefined,
     image3: undefined,
+    frecuence:140,
 
     
 
@@ -254,12 +255,16 @@ const rugbyApp = {
         this.oponents = []
         this.players = []
         this.framesIndex = 0
+        this.frecuence = 0
+        this.level = 4
+        this.frecuence=140
     },
     drawAll() {
         intervalID = setInterval(() => {
             this.framesIndex++
             this.audio.play()
-            this.framesIndex % 100 === 0 ? this.createOponents() : null
+            this.levelUp()
+            this.framesIndex % this.frecuence === 0 ? this.createOponents() : null
             this.clearAll()
             this.Background.draw()
             this.playerCentre.drawPlayer(this.framesIndex,this.image1)
@@ -271,8 +276,9 @@ const rugbyApp = {
             this.move();
             this.pass()
             this.oponents.forEach(elm => {
-                elm.draw(this.framesIndex,this.player)
+                elm.draw(this.framesIndex,this.player,this.level)
             })
+            
             this.checkColision()
             this.horizontalCheckLeft()
             this.horizontalCheckRight()
@@ -304,5 +310,14 @@ const rugbyApp = {
         this.image3.frames = 2;
         this.image3.framesIndex = 1;
 
+    },
+    levelUp(){
+        if(this.framesIndex%2100===0 && this.frecuence>100){
+            this.frecuence-=20
+        }
+        if (this.frecuence <= 100 && this.level<7){
+            this.frecuence = 140
+            this.level +=1
+        }
     }
 }
