@@ -246,7 +246,7 @@ const rugbyApp = {
     // },
     initImageOver(){
         this.gameOverImg = new Image()
-        this.gameOverImg.src = '../images/gameOver.jpg'
+        this.gameOverImg.src = 'images/gameOver.jpg'
     },
     gameOver() {
         clearInterval(intervalID)
